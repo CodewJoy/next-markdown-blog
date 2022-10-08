@@ -1,0 +1,1 @@
+export const sortByDate = (a, b) => (new Date(b.data.date) - new Date(a.data.date));
