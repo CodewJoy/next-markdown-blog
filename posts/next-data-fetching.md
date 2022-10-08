@@ -3,8 +3,8 @@ title: 'Understanding Next.js Data Fetching'
 date: 'January 11, 2022'
 readTime: '20 min'
 ---
-# Understanding Next.js Data Fetching (CSR, SSR, SSG, ISR)
-
+<!-- # Understanding Next.js Data Fetching (CSR, SSR, SSG, ISR)
+ -->
 ###### tags: `Next.js`
 
 ## Outline

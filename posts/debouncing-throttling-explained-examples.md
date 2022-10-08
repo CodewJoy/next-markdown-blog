@@ -3,8 +3,8 @@ title: 'Debouncing and Throttling: explained through examples'
 date: 'August 9, 2021'
 readTime: '25 min'
 ---
-# Debounce & Throttle: 網頁 DOM 事件的效能優化
-
+<!-- # Debounce & Throttle: 網頁 DOM 事件的效能優化
+ -->
 ###### tags: `Debounce` `Throttle`
 
 # 起源

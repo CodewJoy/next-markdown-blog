@@ -3,38 +3,47 @@ import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 import Link from 'next/link';
+import IntroSelf from '../../components/IntroSelf';
+import styles from '../../styles/PostPage.module.css';
 
-marked.setOptions({
-    renderer: new marked.Renderer(),
-    highlight: function(code, lang) {
-      const hljs = require('highlight.js');
-      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-      return hljs.highlight(code, { language }).value;
-    },
-    langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
-    pedantic: false,
-    gfm: true,
-    breaks: false,
-    sanitize: false,
-    smartypants: false,
-    xhtml: false
-});  
+// marked.setOptions({
+//     renderer: new marked.Renderer(),
+//     highlight: function(code, lang) {
+//       const hljs = require('highlight.js');
+//       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+//       return hljs.highlight(code, { language }).value;
+//     },
+//     langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+//     pedantic: false,
+//     gfm: true,
+//     breaks: false,
+//     sanitize: false,
+//     smartypants: false,
+//     xhtml: false
+// });  
 
 export default function PostPage({ data, content }) {
     return (
-        <>
-            <Link href='/'>
-                <a className='btn btn-back'>Go Back</a>
-            </Link>
-            <div className='card card-page'>
-            <h1 className='post-title'>{data.title}</h1>
-            <div className='post-date'>Posted on {data.date}</div>
-            <div>{data.readTime}</div>
-            <div className='post-body'>
-                <div dangerouslySetInnerHTML={{ __html: marked.parse(content) }}></div>
-            </div>
-            </div>
-        </>
+        <div className={styles.container}>
+            <header>
+                <Link href='/'>
+                    <h3>Code to Joy</h3>
+                </Link>
+            </header>
+            <main>
+                <h1 className='post-title'>{data.title}</h1>
+                <small>{data.date} • {data.readTime} read</small> 
+                <div className='post-body'>
+                    <div dangerouslySetInnerHTML={{ __html: marked.parse(content) }}></div>
+                </div>
+            </main>
+            <footer>
+                <Link href='/'>
+                    <h3>Code to Joy</h3>
+                </Link>
+                <IntroSelf />
+            </footer>
+        </div>
     );
 };
 

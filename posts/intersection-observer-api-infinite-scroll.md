@@ -3,8 +3,8 @@ title: 'Realize Infinite Scroll with Intersection Observer API'
 date: 'October 6, 2022'
 readTime: '20 min'
 ---
-# 使用 Intersection Observer API 實現 Infinite Scroll
-
+<!-- # 使用 Intersection Observer API 實現 Infinite Scroll
+ -->
 ###### tags: `Intersection Observer` `Web API`
 
 ## 前言

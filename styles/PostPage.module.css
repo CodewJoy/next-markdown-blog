@@ -1,0 +1,19 @@
+.container {
+    max-width: 42rem;
+    padding: 2.6rem 1.3rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container h1, .container h2, .container h3, .container h4, .container h5 {
+    color: #C094EC;
+}
+.container pre {
+    background: lightgray;
+    color: black;
+    border-radius: 5px;
+    overflow: overlay;
+    padding: 10px;
+}
+.container img {
+    max-width: 42rem;
+}
