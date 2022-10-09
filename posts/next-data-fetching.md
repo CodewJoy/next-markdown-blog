@@ -253,5 +253,5 @@ https://ithelp.ithome.com.tw/m/articles/10267249
 10. https://github.com/LiangYingC/next-csr-ssr-ssg-simple-demo
 
 ### Further study
-https://nextjs.org/docs/basic-features/data-fetching/overview
-https://ithelp.ithome.com.tw/m/articles/10267894
+* https://nextjs.org/docs/basic-features/data-fetching/overview
+* https://ithelp.ithome.com.tw/m/articles/10267894
