@@ -16,7 +16,7 @@ readTime: '20 min'
 #### 過去的實作
 在過去要偵測元素是否已經進入「可視範圍」這件事情一種可行的方式是：註冊 scroll 事件監聽搭配運用 [Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)、[offsetTop](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetTop)、[offsetLeft](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetLeft)
 
-> 熟悉的 [Stylish](https://codewjoy.github.io/Stylish-Web-Joy/) Code... 
+Example: 熟悉的 [Stylish](https://codewjoy.github.io/Stylish-Web-Joy/) Code
 ```typescript=
 // scroll and call getNextPaging()
 window.addEventListener('scroll', () => {getNextPaging()});
@@ -37,6 +37,7 @@ function getNextPaging() {
 }
 ```
 [demo of getBoundingClientRect](https://bqv9r.csb.app/)
+
 ![](https://i.imgur.com/5ENiqSl.png)
 
 #### 缺點
@@ -88,15 +89,17 @@ observer.observe(TARGET_ELEMENT)
 ```
 #### options 參數
 - `root` 必須要是所有目標元素的父元素(或祖父層的元素)
+
 ![](https://i.imgur.com/aWZy7jw.png)
 - `rootMargin`：設定 root 周圍的 margin — 能有效的**擴大或縮小這個用來觀察的盒子範圍**。設定的值就類似設定一般 margin："30px 30px 30px 30px"（上右下左），也能縮寫成一個值：30px
-![](https://i.imgur.com/wl76ich.png)
 
+![](https://i.imgur.com/wl76ich.png)
 - `threshold`：設定目標元素的可見度達到多少比例時，觸發 callback 函式。可以帶入單一一個值：**只想在可見度達一個比例時觸發**；也可帶入一個陣列：**想在可見度達多個比例時觸發** 
     - 預設值為 0：一但目標進入或目標的最後一個 px 離開觀察範圍時就觸發
     - 設定為 0.5 ：一但可見度為 50% 時就觸發
     - 設定為 1：可見度達 100% 或一但往下掉低於 100% 時就觸發
     - **設定為 [0, 0.25, 0.5, 0.75, 1]：可見度每跳 25% 時就觸發** -> 看範例
+
 ![](https://i.imgur.com/0p1139z.png)
 ![](https://i.imgur.com/MulbGt7.png)
 #### callback 中的 entry 參數

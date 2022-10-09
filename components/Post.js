@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import styles from '../styles/Post.module.css';
+import ArcDescrip from './ArcDescrip';
 
 export default function Post({ post }) {
   return (
-    <div className='card'>
+    <div>
         <Link href={`/blog/${post.slug}`}>
-            <h3 className={styles.title}>{post.data.title}</h3>
+            <h3 className='article-title link'>{post.data.title}</h3>
         </Link>
-        <small>{post.data.date} • {post.data.readTime} read</small> 
+        <ArcDescrip date={post.data.date} readTime={post.data.readTime} />
     </div>
   )
 };

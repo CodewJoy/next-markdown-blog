@@ -15,14 +15,6 @@ a {
   box-sizing: border-box;
 }
 
-header {
-  margin-bottom: 2.5rem;
-}
-
-footer {
-  margin-top: 5rem;
-}
-
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -33,16 +25,21 @@ footer {
     min-height: 100vh;
   }
 }
+/* Common */
+header {
+  margin-bottom: 2.5rem;
+}
 
-.container {
-  max-width: 42rem;
-  padding: 2.6rem 1.3rem;
-  margin-left: auto;
-  margin-right: auto;
+footer {
+  margin-top: 5rem;
+}
+
+a, .link:hover {
+  cursor: pointer;
 }
 
 .text-color {
-  color: #C094EC;
+  color: #F3A6C4;
 }
 
 .uderline {
@@ -55,4 +52,23 @@ footer {
 
 .intro-self-text {
   margin-left: 0.875rem;
+}
+
+/* Home */
+.container {
+  max-width: 42rem;
+  padding: 2.5rem 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.blog-title {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Post */
+.article-title {
+  font-size: 1.75rem;
+  margin-top: 3.5rem;
+  color: #F3A6C4;
 }

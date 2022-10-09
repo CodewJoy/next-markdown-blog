@@ -1,19 +1,25 @@
 .container {
     max-width: 42rem;
-    padding: 2.6rem 1.3rem;
+    padding: 2.5rem 0;
     margin-left: auto;
     margin-right: auto;
 }
-.container h1, .container h2, .container h3, .container h4, .container h5 {
-    color: #C094EC;
+.marked h1, .marked h2, .marked h3, .marked h4, .marked h5, .marked h6 {
+    color: #F3A6C4;
 }
-.container pre {
-    background: lightgray;
+/* Code */
+.marked pre {
+    overflow: overlay;
+    background: #ECECEC;
     color: black;
     border-radius: 5px;
-    overflow: overlay;
     padding: 10px;
 }
-.container img {
+.marked img {
     max-width: 42rem;
+    background: #ECECEC;
+}
+.marked a {
+    color: #F3A6C4;
+    box-shadow: 0 1px 0 0 currentColor;
 }

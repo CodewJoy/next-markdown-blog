@@ -2,8 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
-import Link from 'next/link';
+import BlogTitle from '../../components/BlogTitle';
 import IntroSelf from '../../components/IntroSelf';
+import ArcDescrip from '../../components/ArcDescrip';
 import styles from '../../styles/PostPage.module.css';
 
 // marked.setOptions({
@@ -26,21 +27,17 @@ export default function PostPage({ data, content }) {
     return (
         <div className={styles.container}>
             <header>
-                <Link href='/'>
-                    <h3>Code to Joy</h3>
-                </Link>
+                <BlogTitle />
             </header>
-            <main>
+            <main className={styles.marked}>
                 <h1 className='post-title'>{data.title}</h1>
-                <small>{data.date} • {data.readTime} read</small> 
+                <ArcDescrip date={data.date} readTime={data.readTime} />
                 <div className='post-body'>
                     <div dangerouslySetInnerHTML={{ __html: marked.parse(content) }}></div>
                 </div>
             </main>
             <footer>
-                <Link href='/'>
-                    <h3>Code to Joy</h3>
-                </Link>
+                <BlogTitle />
                 <IntroSelf />
             </footer>
         </div>

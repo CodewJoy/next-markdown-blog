@@ -156,6 +156,7 @@ export const getStaticProps: GetStaticProps = async () => {
 ### 特色
 * 當每次 User 進到頁面時，取得已經製作好的靜態檔案並 render，畫面一次到位。
 * 可以設定幾秒要 re-validate 並更新頁面，在 re-validate 的期間，還沒有 Build 產生最新資料頁面之前，會先回傳先前被 cache 的版本，等到產生最新頁面之後才會更新 CDN 中的快取(這樣的快取策略被稱作 [stale-while-revalidate](https://web.dev/i18n/en/stale-while-revalidate/))，user reload page 後可以看到更新後的頁面。如果重 Buld 畫面失敗，會顯示舊的頁面。
+
 ![](https://i.imgur.com/mAbE8Bk.png)
 
 **stale-while-revalidate concept**
@@ -165,11 +166,14 @@ export const getStaticProps: GetStaticProps = async () => {
 [Reference](https://theodorusclarence.com/blog/nextjs-fetch-method)
 
 * 可以在 ISR 重 load 幾次資料，會發現有時 server response status code 是 304，代表瀏覽器直接從本身的 cache 讀取內容，所以檔案傳輸非常小。
+
 ![](https://i.imgur.com/6lNnx3p.png)
 
 * 若使用 Vercel 服務作部署，可留意 Response Headers 中 x-vercel-cache 的值，若為 STALE 代表目前拿到的是在 cache 中的舊版本。
+
 ![](https://i.imgur.com/B36EUST.png)
 A background request to the origin was made to get a fresh version.
+
 ![](https://i.imgur.com/L2L3KSt.png)
 [Reference](https://vercel.com/docs/concepts/edge-network/x-vercel-cache)
 
