@@ -61,6 +61,8 @@ export async function getStaticProps({ params: { slug } }) {
     const fileName = `${slug}.md`
     const article = fs.readFileSync(path.join('posts', fileName), 'utf8');
     const { data, content } = matter(article);
+    console.log('matter(article)', matter(article));
+    console.log('typeof content', typeof content);
     return {
       props: {
         data, content,

@@ -43,7 +43,6 @@ export async function getStaticProps() {
     const slug = fileName.replace('.md', '');
     const content = fs.readFileSync(path.join('posts', fileName), 'utf8');
     const { data } = matter(content);
-    console.log(48, data);
     return {
       slug,
       data,
