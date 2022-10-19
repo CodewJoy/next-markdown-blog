@@ -11,10 +11,7 @@
 /* Code */
 .marked pre {
     overflow: overlay;
-    background: #f8f8f8;
-    color: black;
     border-radius: 5px;
-    padding: 10px;
 }
 .marked img {
     max-width: 100%;

@@ -6,22 +6,24 @@ import BlogTitle from '../../components/BlogTitle';
 import IntroSelf from '../../components/IntroSelf';
 import ArcDescrip from '../../components/ArcDescrip';
 import styles from '../../styles/PostPage.module.css';
+import hljs from 'highlight.js';
 
-// marked.setOptions({
-//     renderer: new marked.Renderer(),
-//     highlight: function(code, lang) {
-//       const hljs = require('highlight.js');
-//       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-//       return hljs.highlight(code, { language }).value;
-//     },
-//     langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
-//     pedantic: false,
-//     gfm: true,
-//     breaks: false,
-//     sanitize: false,
-//     smartypants: false,
-//     xhtml: false
-// });  
+marked.setOptions({
+    // renderer: new marked.Renderer(),
+    highlight: function(code, lang) {
+    //   console.log('code', code);
+    //   console.log('lang', lang);
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    },
+    langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+    // pedantic: false,
+    // gfm: true,
+    // breaks: false,
+    // sanitize: false,
+    // smartypants: false,
+    // xhtml: false
+});  
 
 export default function PostPage({ data, content }) {
     return (
@@ -61,8 +63,8 @@ export async function getStaticProps({ params: { slug } }) {
     const fileName = `${slug}.md`
     const article = fs.readFileSync(path.join('posts', fileName), 'utf8');
     const { data, content } = matter(article);
-    console.log('matter(article)', matter(article));
-    console.log('typeof content', typeof content);
+    // console.log('matter(article)', matter(article));
+    // console.log('typeof content', typeof content);
     return {
       props: {
         data, content,

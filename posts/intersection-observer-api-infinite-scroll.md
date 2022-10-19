@@ -17,7 +17,7 @@ readTime: '20 min'
 在過去要偵測元素是否已經進入「可視範圍」這件事情一種可行的方式是：註冊 scroll 事件監聽搭配運用 [Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)、[offsetTop](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetTop)、[offsetLeft](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetLeft)
 
 Example: 熟悉的 [Stylish](https://codewjoy.github.io/Stylish-Web-Joy/) Code
-```typescript=
+```javascript
 // scroll and call getNextPaging()
 window.addEventListener('scroll', () => {getNextPaging()});
 
@@ -57,7 +57,7 @@ function getNextPaging() {
 [demo](https://codepen.io/yichenhung/pen/wvmgawO?editors=0010)
 - `callback` 函式：當目標元素進入或離開指定外層或預設 viewport 時觸發
 - `options`：設定在哪些情況下觸發`callback` 函式
-```javascript=
+```javascript
 // entries 能拿到所有目標元素進出(intersect)變化的資訊
 let callback = (entries) => {
     
@@ -107,7 +107,7 @@ observer.observe(TARGET_ELEMENT)
 - `isIntersecting`：用來判別目標元素是否進入或離開了 viewport
     - 值由 false 轉為 true：目標元素進入 viewport
     - 值由 true 轉為 false：目標元素離開 viewport
-```javascript=
+```javascript
 let callback = (entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -133,7 +133,7 @@ let callback = (entries, observer) => {
 :::
 
 - `observer.unobserve(entry.target)`: 只想一次性偵測目標對象的進入或離開
-```javascript=
+```javascript
 let callback = (entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {

@@ -43,7 +43,7 @@ https://codepen.io/athena0304/pen/mGbgGo/
 * 設一個計時器 (timer)，保存當下脈絡後 (context, args)
 * 只要太早進來 (小於 delay) 就會重置計時器，直到成功執行 setTimeout 內的函式後結束。
 * 注意這裡 debounce 回傳的是一個閉包 (closure)，是 js 的一個重要特性，不這樣寫的話 timer 就必須是全域變數，以防止每次呼叫 timer 都被重置產生錯誤。
-```javascript=
+```javascript
 /**
 * @param fn{Function} 實際要執行的函數
 * @param delay {Number} 延遲時間，也就是域值
@@ -93,7 +93,7 @@ https://codepen.io/athena0304/pen/KxPLZy/
 ### 程式碼概念
 與 debounce 的程式邏輯相似，只多了一個時間間隔的判斷。
 
-```javascript=
+```javascript
 /**
 * @param fn{Function} 實際要執行的函數
 * @param delay {Number} 執行間隔，單位是毫秒
@@ -149,7 +149,7 @@ https://codepen.io/dcorb/pen/eJLMxa
 
 使用 _.debounce 函數的一個常見錯誤就是多次調用它：
 
-```javascript=
+```javascript
 // wrong
 $(window).on('scroll', function() {
    _.debounce(doSomething, 300); 
@@ -159,7 +159,7 @@ $(window).on('scroll', _.debounce(doSomething, 200));
 ```
 
 為 debounced 函數創建一個變量保存他，就可以讓我們調用他的私有函數 debounced_version.cancel()，lodash 也能這麼使用。
-```javascript=
+```javascript
 var debounced_version = _.debounce(doSomething, 200);
 $(window).on('scroll', debounced_version);
 // 如果需要的话
