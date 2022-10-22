@@ -66,7 +66,7 @@ export default function PostPage({ data, content, prevPost, nextPost }) {
 
 export async function getStaticPaths() {
     const files = fs.readdirSync(path.join('posts'));
-    console.log('files', files)
+    // console.log('files', files);
     const paths = files.map((fileName) => ({
         params: { 
             slug: fileName.replace('.md', ''),
@@ -83,8 +83,8 @@ export async function getStaticProps({ params: { slug } }) {
     const fileName = `${slug}.md`
     const article = fs.readFileSync(path.join('posts', fileName), 'utf8');
     const { data, content } = matter(article);
-    console.log('matter(article)', matter(article));
-    console.log('typeof content', typeof content);
+    // console.log('matter(article)', matter(article));
+    // console.log('typeof content', typeof content);
 
     /** get prev and next article content */
     const files = fs.readdirSync(path.join('posts'));
@@ -97,10 +97,10 @@ export async function getStaticProps({ params: { slug } }) {
           data,
         };
       });
-    console.log('posts', posts)
+    // console.log('posts', posts);
     const sortedPosts = posts.sort(sortByDate);
     const currentArtIndex = sortedPosts.findIndex((el) => el.slug === slug);
-    console.log('currentArtIndex', currentArtIndex)
+    // console.log('currentArtIndex', currentArtIndex);
     const hasPrevPost = currentArtIndex !== -1 && currentArtIndex !== 0;
     const prevPost = hasPrevPost ? sortedPosts[currentArtIndex - 1] : null;
     const hasNextPost = currentArtIndex !== -1 && currentArtIndex !== (sortedPosts.length - 1);
