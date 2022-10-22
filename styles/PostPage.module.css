@@ -3,7 +3,6 @@
     padding: 2.5rem 1rem;
     margin-left: auto;
     margin-right: auto;
-    overflow: auto;
 }
 .marked h1, .marked h2, .marked h3, .marked h4, .marked h5, .marked h6 {
     color: var(--text-link);
@@ -24,3 +23,9 @@
 .marked p {
     line-height: 1.5;
 }
+.see-other-article {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3.5rem;
+}
+

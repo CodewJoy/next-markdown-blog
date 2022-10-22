@@ -14,6 +14,7 @@ body {
 
 body {
   min-height: 100vh;
+  word-wrap: break-word;
 }
 
 a {
@@ -69,7 +70,6 @@ a, .link:hover {
   padding: 2.5rem 1rem;
   margin-left: auto;
   margin-right: auto;
-  overflow: auto;
 }
 .blog-title {
   margin-top: 0;

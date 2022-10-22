@@ -9,7 +9,7 @@ export default function IntroSelf() {
         <Link href='https://github.com/CodewJoy' passHref>
           <a className='text-color uderline'>Joy Hung</a> 
         </Link>
-        .<br/>Curiosity turns work into play.</p>
+        .<br/>Curiosity turns coding into play 🤘</p>
     </asid>
   )
 };
