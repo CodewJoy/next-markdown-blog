@@ -126,11 +126,9 @@ let callback = (entries, observer) => {
 
 - `intersectionRatio`：目標元素有多少比例和用來觀察的盒子重疊（白話的來說：目標元素的可見度為多少）。計算方式：*intersectionRect / boundingClientRect*
 
-:::info
-:warning: threshold 與 intersectionRatio 兩者差異 ?
+#### threshold 與 intersectionRatio 兩者差異 ?
 - options 所設定的 threshold 是想訂定「何時觸發」，threshold 當中所設定的單一或多個值就是在設定一個個 intersectionRatio 值作為門檻，一但跨越這個門檻（或這些門檻），就觸發 callback 函式
 - intersectionRatio 則是當目標元素進出（intersect）變化當下的即時資訊
-:::
 
 - `observer.unobserve(entry.target)`: 只想一次性偵測目標對象的進入或離開
 ```javascript
@@ -145,13 +143,13 @@ let callback = (entries, observer) => {
   })
 }
 ```
+#### Infinite scroll example
+[Append new child](https://codepen.io/shubochao/pen/NWPpQGG)
 
-[Infinite scroll example - append new child](https://codepen.io/shubochao/pen/NWPpQGG)
+[Add image](https://codepen.io/yichenhung/pen/poLwLzz)
 
-[Infinite scroll example - add image](https://codepen.io/yichenhung/pen/poLwLzz)
-
-#### 瀏覽器支援度
-:warning: Jun 1, 2022 除了IE不支援, chrome, safari, firefox都支援 
+### 瀏覽器支援度
+Jun 1, 2022 除了IE不支援, chrome, safari, firefox都支援 
 [Can I use Search?](https://caniuse.com/?search=Intersection%20Observer)
 
 ### Libraries
@@ -162,6 +160,7 @@ let callback = (entries, observer) => {
 [scrollspy 也有使用到 intersection observer 的概念](https://bootstrap5.hexschool.com/docs/5.0/components/scrollspy/)
 
 ### Reference
+[Import on Visibility](https://hackmd.io/@Emmacheng/SyQInMaI9) [@Emmacheng](https://github.com/ecolip) 
 [Intersection Observer API MDN](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
 [Intersection Observer API：Lazy Loading, Infinite Scroll](https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E8%AA%8D%E8%AD%98-intersection-observer-api-%E5%AF%A6%E4%BD%9C-lazy-loading-%E5%92%8C-infinite-scroll-c8d434ad218c)
 [modules-dynamic-imports article](https://javascript.info/modules-dynamic-imports)
