@@ -3,9 +3,6 @@ title: '[Note] Why use Redux?'
 date: 'December 10, 2022'
 readTime: '10 min'
 ---
-
-# [Note] Why use Redux?
-
 ###### tags: `Redux` 
 
 > A Predictable State Container for JS Apps
