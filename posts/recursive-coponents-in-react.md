@@ -2,7 +2,7 @@
 title: 'Recursive Components in React'
 date: 'January 13, 2024'
 readTime: '15min'
-difficultyLevel: '3'
+difficultyLevel: '2'
 ---
 ###### tags: `React`, `recursive`
 
