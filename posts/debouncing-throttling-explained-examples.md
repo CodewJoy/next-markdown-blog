@@ -2,10 +2,11 @@
 title: 'Debouncing and Throttling: explained through examples'
 date: 'August 9, 2021'
 readTime: '25 min'
+difficultyLevel: '4'
 ---
 <!-- # Debounce & Throttle: 網頁 DOM 事件的效能優化
  -->
-###### tags: `Debounce` `Throttle`
+###### tags: `Debounce`, `Throttle`
 
 # 起源
 各版本的瀏覽器實作時，為了確保滑鼠移動、滾動、改變視窗大小 (mousemove, scroll, resize) 等事件能夠及時回應維持使用者體驗，觸發的頻率會比較高。也就是說，使用者在一個正常的操作中，有可能在短時間內觸發非常多次事件處理器 (event handler)。

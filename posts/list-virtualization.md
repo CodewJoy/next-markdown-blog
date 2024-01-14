@@ -2,8 +2,9 @@
 title: 'List Virtualization (windowing)'
 date: 'April 15, 2023'
 readTime: '30 min'
+difficultyLevel: '4'
 ---
-###### tags: `front-end` `efficiency`
+###### tags: `front-end`, `efficiency`
 
 ## Introduction
 In web development, rendering large sets of data can be a challenge, especially when it comes to performance. List Vitualization are one solution to this problem.

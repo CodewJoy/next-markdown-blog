@@ -2,10 +2,11 @@
 title: 'Realize Infinite Scroll with Intersection Observer API'
 date: 'October 6, 2022'
 readTime: '20 min'
+difficultyLevel: '4'
 ---
 <!-- # 使用 Intersection Observer API 實現 Infinite Scroll
  -->
-###### tags: `Intersection Observer` `Web API`
+###### tags: `Intersection Observer`, `Web API`
 
 ## 前言
 現代瀏覽器提供的 Intersection Observer API 非常適合用來實現 Infinite Scroll 和 Lazy Loading 等前端常見的需求。

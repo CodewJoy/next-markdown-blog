@@ -2,6 +2,7 @@
 title: '[Note] Why use Redux?'
 date: 'December 10, 2022'
 readTime: '10 min'
+difficultyLevel: '2'
 ---
 ###### tags: `Redux` 
 

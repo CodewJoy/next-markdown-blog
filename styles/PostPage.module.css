@@ -20,8 +20,8 @@
     color: var(--text-link);
     box-shadow: 0 1px 0 0 currentColor;
 }
-.marked p {
-    line-height: 1.5;
+.marked p, .marked li, .marked code {
+    line-height: 2;
 }
 .see-other-article {
     display: flex;

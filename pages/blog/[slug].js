@@ -35,7 +35,7 @@ export default function PostPage({ data, content, prevPost, nextPost }) {
             </header>
             <main className={styles.marked}>
                 <h1 className='post-title'>{data.title}</h1>
-                <ArcDescrip date={data.date} readTime={data.readTime} />
+                <ArcDescrip date={data.date} readTime={data.readTime} difficultyLevel={data.difficultyLevel} />
                 <div className='post-body'>
                     <div dangerouslySetInnerHTML={{ __html: marked.parse(content) }}></div>
                 </div>

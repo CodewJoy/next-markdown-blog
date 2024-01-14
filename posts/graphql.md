@@ -1,7 +1,8 @@
 ---
 title: 'GraphQL - Graph Query Language'
 date: 'December 17, 2023'
-readTime: '20 min'
+readTime: '25 min'
+difficultyLevel: '4'
 ---
 ###### tags: `full stack`  
 
