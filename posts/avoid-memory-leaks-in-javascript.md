@@ -46,7 +46,7 @@ difficultyLevel: '3'
 
 全域變數不會被 GC 回收。在非嚴格模式下，需避免以下錯誤: 
 * 給未宣告的變數賦值，會讓區域變數變成全域變數
-```javascript=
+```javascript
 // wrong
 function createGlobalVariables() { 
     leaking1 = '變成全域性變數'; // 如果作用域內沒有宣告變數，卻賦值給該變數，JavaScript 會自動幫我們在全域宣告一個全域變數
@@ -55,7 +55,7 @@ createGlobalVariables();
 window.leaking1; // '變成全域性變量了' => 在瀏覽器下的全域物件是 window
 ```
 * 使用指向全域性物件的 this，會讓區域變數變成全域變數
-```javascript=
+```javascript
 // wrong
 function createGlobalVariables() { 
     this.leaking2 = '這也是全域性變數';
@@ -70,7 +70,7 @@ window.leaking2; // '這也是全域性變數'
 
 一般的函式作用域變數在函式執行完後會被清理. 
 閉包讓我們可以從 inner 函式訪問 outer 函式 scope 的變數，此特性會讓該變數一直處於被引用狀態，不會被 GC 回收。
-```javascript=
+```javascript
 // wrong
 function outer() {
   const potentiallyHugeArray = [];
@@ -104,7 +104,7 @@ repeat(sayHello, 10); // 每次呼叫 sayHello 都會新增 'Hello' 到potential
 下面的例子中，data 物件只能在 timer 清掉後被 GC 回收。但因為沒有拿到 setInterval return 的定時器 ID，也就沒辦法用程式碼清除這個 timer。
 雖然 data.hugeString 完全沒被使用，也會一直保留在記憶體中。
 
-```javascript=
+```javascript
 // wrong
 function setCallback() { 
     const data = { 
@@ -125,7 +125,7 @@ setInterval(setCallback(), 1000); // 無法停止定時器
 * 留意被 timer 的 callback 所參考的物件
 * 必要時使用 timer return 的定時器 ID，丟進 clearTimeout 或 clearInterval 以清除 timer。
 
-```javascript=
+```javascript
 // right
 function setCallback() { 
     // 分開定義變數 
@@ -150,7 +150,7 @@ clearInterval(timerId); // 清除定時器，ex 按完按鈕後清除
 1. 使用 removeEventListener() 移除該 event listers
 2. 移除與其關聯的 DOM 元素
 
-```javascript=
+```javascript
 // wrong
 const hugeString = new Array(100000).join('x');
 
@@ -167,7 +167,7 @@ document.addEventListener('keyup', function() { // 匿名監聽器無法移除
 
 **如何避免**
 當事件監聽器不再需要時，使用具名函式方式得到其 reference，並且在 removeEventListener() 中解除事件監聽器跟關聯的 DOM 元素的連結
-```javascript=
+```javascript
 // right
 function listener() { 
     doSomething(hugeString); 
@@ -178,7 +178,7 @@ document.removeEventListener('keyup', listener);
 
 如果事件監聽器只需要執行一次， addEventListener()可以接受[第三個 optional 參數 {once: true}](https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener)，監聽器函式會在事件觸發一次執行後自動移除(此時匿名函式也可以用此方式)。
 
-```javascript=
+```javascript
 // right
 document.addEventListener('keyup', function listener(){ 
     doSomething(hugeString); 
@@ -187,7 +187,7 @@ document.addEventListener('keyup', function listener(){
 ```
 
 React 寫法
-```javascript=
+```javascript
 useEffect(() => {
     window.addEventListener('keyup', listener);  
     return () => {
@@ -199,7 +199,7 @@ useEffect(() => {
 ### 5. 儲存 DOM 的變數
 如果 DOM 節點被 JavaScript 程式碼持續引用，即使將該節點從 DOM three 移除，也不會被 GC 回收。
 
-```javascript=
+```javascript
 // wrong
 function createElement() { 
     const div = document.createElement('div'); 
@@ -220,7 +220,7 @@ deleteElement(); // Heap snapshot 顯示為 detached div#detached
 
 **如何避免**
 限制只能在 local scope 之內引用 DOM
-```javascript=
+```javascript
 // right
 function createElement() { 
     const div = document.createElement('div'); 
@@ -251,7 +251,7 @@ deleteElement();
 
 Wrong Example: 使用 Map 資料結構來儲存快取
 
-```javascript=
+```javascript
 // wrong
 let user_1 = { name: "Peter", id: 12345 };
 let user_2 = { name: "Mark", id: 54321 };
@@ -287,7 +287,7 @@ console.log(mapCache); // ((…) => "Peter has an id of 12345", (…) => "Mark h
 解決方案： 上述案例可以改使用 [WeakMap](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)。 
 WeakMap 是 ES6 新增的一種資料結構，它只用物件作為 key，並保持物件 key 的 weak reference，如果物件 key 被置空了，相關的 key value pair 會被 GC 自動回收。
 
-```javascript=
+```javascript
 // right
 let user_1 = { name: "Kayson", id: 12345 }; 
 let user_2 = { name: "Jerry", id: 54321 }; 

@@ -4,7 +4,6 @@ date: 'October 29, 2022'
 readTime: '20 min'
 difficultyLevel: '3'
 ---
-# Design Pattern - Mediator/Middleware Pattern
 ###### tags: `design pattern`
 > 協調各元件之間互動的中間人。
 
@@ -45,8 +44,54 @@ difficultyLevel: '3'
 > Mediator 就是一個統一協調各個相關 Colleague 互動的中間人，所以它需要知道怎麼存取這些 Colleague。
 
 ### Code Example
-[group chat room](https://codesandbox.io/s/chat-room-with-middleware-krf7vo?file=/src/index.js)
+[group chat room](https://codesandbox.io/p/sandbox/chat-room-with-middleware-krf7vo?file=%2Fsrc%2Findex.js)
 chat room 作為 users 間的 mediator，users 彼此之間不用直接溝通。
+
+```javascript
+/** Mediator Interface */
+// STEP 2. 做 ChatRoom 的 class
+class ChatRoom {
+  logMessage(user, message) {
+    const sender = user.getName();
+    // 印出目前的時間，sender 傳了什麼 message
+    console.log(`${new Date().toLocaleString()} [${sender}]: ${message}`);
+  }
+}
+
+// STEP 1. 做 user 的 class
+class User {
+  constructor(name, chatroom) {
+    this.name = name;
+    // 持有 Mediator 的 reference，以呼叫 Mediator 來幫它做事情。
+    this.chatroom = chatroom;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  // send method can use in order to send messages.
+  send(message) {
+    // 呼叫 chatroom 幫忙做事情, 帶入 User 和 message
+    this.chatroom.logMessage(this, message);
+  }
+}
+
+// STEP 3. ChatRoom Interface 的實作
+const chatroom = new ChatRoom();
+
+/** create new users that are connected to the chat room */
+// STEP 4. 實作各個 user，chatroom 會跟各個 user 產生直接關聯
+const user1 = new User("R", chatroom);
+const user2 = new User("J", chatroom);
+const user3 = new User("K", chatroom);
+
+// STEP 5. 當 user X send 出 message 時
+// 呼叫 mediator chatroom 執行內部 logMessage 的函式
+user1.send("K 什麼時候要辦人夫讀書會，想跟 K 學習");
+user2.send("我也想跟 K 學習");
+user3.send("群裡還有很多人夫大前輩");
+```
 
 [air traffic control tower](https://wyattkidd.medium.com/%E7%BF%BB%E8%AD%AF-javascript-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F-fca4e2e16752)
 

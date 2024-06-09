@@ -24,8 +24,7 @@ e.g. 更改網站的主題，並在所有 Tab 之間同步這些變更。
 要實現在不同 Tab 之間的溝通，有以下方法：
 
 1. LocalStorage 或 SessionStorage： 這兩者都是在不同標籤之間共享資料的簡單方法，但要注意，它們都有大小限制，而且只能存儲字串。
-[Code Example]
-(https://codesandbox.io/p/sandbox/session-storage-example-1-klpei)
+[Code Example](https://codesandbox.io/p/sandbox/session-storage-example-1-klpei)
 **使用 localStorage 的實作概念**
 當 app 在一個 tab 中初次載入時，向 localStorage 中存一個名為 "loaded" 的值，表示 app 已經 loaded。其他 tabs 可以透過監聽 storage 事件來檢測 "loaded" 的變化，得知 app 在其他 tabs 中是否已經 loaded。
 **使用到的觀念**
@@ -51,24 +50,24 @@ You will not be able to use this
 #### How to implement Broadcast Channel API
 **Broadcast Channel interface**
 - Creating or joining a channel
-```javascript!
+```typescript
 // Connection to a broadcast channel
 const bc = new BroadcastChannel("test_channel");
 ```
 - Sending a message
-```javascript!
+```typescript
 // Example of sending of a very simple message
 bc.postMessage("This is a test message.");
 ```
 - Receiving a message
-```javascript!
+```typescript
 // A handler that only logs the event to the console:
 bc.onmessage = (event) => {
   console.log(event);
 };
 ```
 - Disconnecting a channel
-```javascript!
+```typescript
 // Disconnect the channel
 bc.close();
 
@@ -92,6 +91,70 @@ bc.close();
 
 #### 程式碼案例
 [Code Example](https://codesandbox.io/p/sandbox/broadcastchannel-message-demo-1-qckg2)
+
+`index.js`
+```typescript
+import React, { useState, useEffect, useCallback } from "react";
+import ReactDOM from "react-dom";
+import { useBroadcastChannel } from "./hooks";
+
+function App() {
+  const broadcast = useBroadcastChannel("north_ot");
+  const [msg, setMsg] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  const handleBroadcast = useCallback(
+    e => {
+      setMessages([...messages, { person: "Other Tab", value: e.data }]);
+    },
+    [messages]
+  );
+
+  useEffect(() => {
+    if (broadcast) {
+      broadcast.onmessage = handleBroadcast;
+    }
+  }, [broadcast, handleBroadcast]);
+
+  function handleSend() {
+    broadcast.postMessage(msg);
+    setMessages([...messages, { person: "You", value: msg }]);
+    setMsg("");
+  }
+
+  return (
+    <div className="App">
+      <input value={msg} onChange={e => setMsg(e.target.value)} />
+      <button onClick={handleSend}>Send Message</button>
+
+      <h5>Messages</h5>
+      {messages.map((msg, i) => (
+        <p key={i}>
+          <strong>{msg.person}:</strong> {msg.value}
+        </p>
+      ))}
+    </div>
+  );
+}
+```
+
+`hooks.js`
+```typescript
+export const useBroadcastChannel = channel => {
+  const [broadcast, setBroadcast] = useState(null);
+
+  useEffect(() => {
+    const bc = new BroadcastChannel(channel);
+    setBroadcast(bc);
+
+    return () => {
+      bc.close();
+    };
+  }, [channel]);
+
+  return broadcast;
+};
+```
 
 ## Reference
 1. [Cross Tab Communication with Javascript

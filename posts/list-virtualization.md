@@ -66,6 +66,152 @@ Cannot handle scenarios where rows have different heights, resulting in display 
 Render use info example
 - [use list vitulization](https://codesandbox.io/s/user-info-without-framework-pvtg3u?file=/src/App.js)
 
+`App.js`
+```javascript
+import React, { useState, useEffect } from "react";
+import SimpleVirtualizedList from "./SimpleVirtualizedList";
+import { Avatar } from "@material-ui/core";
+
+/** avoid repeat call api in react strict mode */
+let didInit = false;
+
+function App() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    if (didInit) return;
+    didInit = true;
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`https://randomuser.me/api/?results=100`);
+        const data = await res.json();
+        setItems(data.results);
+      } catch (e) {
+        setItems([]);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const renderItem = ({ index, style }) => {
+    const i = items[index];
+    if (!i) return null;
+    return (
+      <div
+        key={`${i.id.name}-${i.id.value}-${i.name?.first}-${i.name?.last}`}
+        className="item"
+        style={{
+          ...style,
+          margin: "10px",
+          display: "flex",
+          alignItems: "center",
+          border: "1px solid lightgray",
+          borderRadius: "10px",
+          width: "calc(100% - 30px)",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "norap"
+        }}
+      >
+        <Avatar
+          alt={`${i.name?.first} ${i.name?.last}`}
+          src={`${i.picture?.medium}`}
+          style={{ margin: "10px" }}
+        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            aligItems: "start"
+          }}
+        >
+          <b>{`${i.name?.first} ${i.name?.last}`}</b>
+          Timezone: {`${i.location?.timezone?.description}`}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="App" style={{ width: "400px" }}>
+      <h1>Use List Vitulization</h1>
+      <SimpleVirtualizedList
+        itemCount={items.length}
+        itemHeight={100}
+        windowHeight={600}
+        renderItem={renderItem}
+      />
+    </div>
+  );
+}
+```
+`SimpleVirtualizedList.js`
+```javascript
+import React, { useState, useMemo, useCallback, useEffect } from "react";
+
+const SimpleVirtualizedList = ({
+  itemCount,
+  itemHeight,
+  renderItem,
+  windowHeight
+}) => {
+  const [scrollTop, setScrollTop] = useState(0);
+  const [items, setItems] = useState([]);
+
+  const innerHeight = useMemo(() => itemCount * itemHeight, [
+    itemCount,
+    itemHeight
+  ]);
+
+  const startIndex = Math.floor(scrollTop / itemHeight);
+
+  const endIndex = Math.min(
+    itemCount - 1, // 99
+    Math.floor((scrollTop + windowHeight) / itemHeight)
+  ); // (0 + 600) / 100 = 6
+
+  useEffect(() => {
+    const itemsList = [];
+
+    for (let i = startIndex; i <= endIndex; i++) {
+      itemsList.push(
+        renderItem({
+          index: i,
+          style: {
+            position: "absolute",
+            top: `${i * itemHeight}px`,
+            height: `${itemHeight - 12}px`
+          }
+        })
+      );
+    }
+    setItems([...itemsList]);
+  }, [endIndex, itemHeight, renderItem, startIndex]);
+
+  const onScroll = useCallback(
+    (e) => setScrollTop(e.currentTarget.scrollTop),
+    []
+  );
+
+  return (
+    <div
+      className="scroll"
+      style={{ overflowY: "scroll", height: `${windowHeight}px` }}
+      onScroll={onScroll}
+    >
+      <div
+        className="inner"
+        style={{ position: "relative", height: `${innerHeight}px` }}
+      >
+        {items}
+      </div>
+    </div>
+  );
+};
+
+export default SimpleVirtualizedList;
+```
+
 ### Libraries
 Several libraries are available for implementing Virtualized Lists in front-end development.
 - ReactJS

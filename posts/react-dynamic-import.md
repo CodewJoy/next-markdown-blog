@@ -4,9 +4,6 @@ date: 'March 9, 2022'
 readTime: '15 min'
 difficultyLevel: '2'
 ---
-
-# Performance Optimization: React 中使用 Dynamic Import
-
 ###### tags: `React`
 
 ## When: 何時可以考慮使用 dynamic import
@@ -49,7 +46,7 @@ lazy API 負責呼叫 import() 語法非同步載入 App 元件，動態載入js
 **我們可以把 Suspense 理解成一種機制，這個機制是用來跟 React 說某個正在被讀取的元件，目前還沒有準備好；而這時 React 就知道要等到該元件準備好後，再更新資料。**
 
 備註：suspense 這個字有懸而未決的意思
-```typescript=
+```typescript
 const ProfilePage = React.lazy(() => import('./ProfilePage')); // lazy loading
 
 // 在 ProfilePage 组件处于加载阶段时显示一个 spinner

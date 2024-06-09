@@ -79,7 +79,7 @@ Test on http://localhost:4000/graphql
 ### Query
 fetch the data
 #### 1. 基本
-```graphql=
+```javascript
   query {
     hello
     users {
@@ -92,7 +92,7 @@ fetch the data
 ```
 得到 server 的 response：
 
-```json=
+```javascript
 {
   "data": {
     "hello": "Hello world!",
@@ -114,7 +114,7 @@ fetch the data
 
 #### 2. 有使用參數
 query + 參數
-```graphql= 
+```javascript 
 query {
   user(id: "1") {
     name
@@ -125,7 +125,7 @@ query {
 
 得到的 response：
 
-```json=
+```javascript
 {
   "data": {
     "user": {
@@ -139,7 +139,7 @@ query {
 Handle create, modify, delete
 #### 基本
 
-```graphql=
+```javascript
 # mutation
 mutation {
   createUser(name: "Charlie", age: 28) {
@@ -151,7 +151,7 @@ mutation {
 ```
 API 成功後，回傳的 response：
 
-```json=
+```javascript
 {
   "data": {
     "createUser": {
