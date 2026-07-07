@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { marked } from "marked";
 import hljs from "highlight.js";
+import Head from "next/head";
 import Link from "next/link";
 import BlogTitle from "../../components/BlogTitle";
 import IntroSelf from "../../components/IntroSelf";
@@ -28,8 +29,19 @@ marked.setOptions({
 });
 
 export default function PostPage({ data, content, prevPost, nextPost }) {
+  const description =
+    data.description || `${data.title} — an article on Code to Joy.`;
+
   return (
-    <div className={styles.container}>
+    <>
+      <Head>
+        <title>{`${data.title} | Code to Joy`}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${data.title} | Code to Joy`} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="article" />
+      </Head>
+      <div className={styles.container}>
       <header>
         <BlogTitle />
       </header>
@@ -46,27 +58,28 @@ export default function PostPage({ data, content, prevPost, nextPost }) {
           ></div>
         </div>
       </main>
-      <footer>
-        <BlogTitle />
-        <IntroSelf />
-        <div className={styles["see-other-article"]}>
-          {prevPost ? (
-            <Link href={`/blog/${prevPost.slug}`}>
-              <a className="text-color"> ← {prevPost.data.title}</a>
-            </Link>
-          ) : (
-            <a />
-          )}
-          {nextPost ? (
-            <Link href={`/blog/${nextPost.slug}`}>
-              <a className="text-color">{nextPost.data.title} → </a>
-            </Link>
-          ) : (
-            <a />
-          )}
-        </div>
-      </footer>
-    </div>
+        <footer>
+          <BlogTitle />
+          <IntroSelf />
+          <div className={styles["see-other-article"]}>
+            {prevPost ? (
+              <Link href={`/blog/${prevPost.slug}`}>
+                <a className="text-color"> ← {prevPost.data.title}</a>
+              </Link>
+            ) : (
+              <a />
+            )}
+            {nextPost ? (
+              <Link href={`/blog/${nextPost.slug}`}>
+                <a className="text-color">{nextPost.data.title} → </a>
+              </Link>
+            ) : (
+              <a />
+            )}
+          </div>
+        </footer>
+      </div>
+    </>
   );
 }
 
